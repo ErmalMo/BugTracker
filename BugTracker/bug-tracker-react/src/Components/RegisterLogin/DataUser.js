@@ -24,6 +24,7 @@ export default function DataUser() {
 
     function handleSubmit(e){
         e.preventDefault();
+        console.log(e.target.dataEmail.value)
         console.log("test");
         fetch('https://localhost:5001/api/datauser',{
             method:'POST',

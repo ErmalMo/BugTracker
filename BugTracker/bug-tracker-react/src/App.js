@@ -1,10 +1,9 @@
 import React from 'react'
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Navigation from './Navigation';
-import { Card } from 'reactstrap';
-import Home from './Home';
-import DataUser from './DataUser';
-
+import Home from './Components/HomeComponent/Home';
+import DataUser from './Components/RegisterLogin/DataUser';
+import Admin from './Components/AdminClass/Admin'
 export default function App() {
   return (
     <BrowserRouter >
@@ -12,7 +11,7 @@ export default function App() {
      <h1 className="m-3 d-flex justify-content-center">
        Welcome to Bug Tracker
      </h1>
-
+     
      <Navigation/>
 
      <Switch>
@@ -22,7 +21,14 @@ export default function App() {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route exact path="/">
+          <Admin />
+        </Route>
       </Switch>
+      
+      
     </BrowserRouter>
+
+    
   );
 }

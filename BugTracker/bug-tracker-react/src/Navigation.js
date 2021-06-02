@@ -30,6 +30,13 @@ export default function Navigation() {
               </Link>
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink>
+              <Link to="/admin">
+                Admiin
+              </Link>
+            </NavLink>
+          </NavItem>
         </Nav>
         </Col>
       </RSNavBar>
