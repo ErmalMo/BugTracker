@@ -78,7 +78,7 @@ namespace BugTracker.Controllers
                 }
             }
 
-            return new JsonResult("Added Successfully");
+            return new JsonResult("Added Successfullyyy");
         }
 
 
