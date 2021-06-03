@@ -44,6 +44,8 @@ export default function ProjectData() {
                 id="projectProgres"
                 placeholder="Progres"
               />
+              <Button outline color="danger" onClick={handleSubmit} >Delete</Button>
+              <Button outline color="primary" onClick={handleSubmit} >Edit</Button>
         <Button outline color="primary" onClick={handleSubmit} >Progres</Button>
         </div>
     )

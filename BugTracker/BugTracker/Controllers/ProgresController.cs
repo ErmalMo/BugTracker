@@ -32,7 +32,7 @@ namespace BugTracker.Controllers
             string query = @"
                     select ProgresId, ProjectProgres from dbo.Progres";
             DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
+            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
             SqlDataReader myReader;
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {

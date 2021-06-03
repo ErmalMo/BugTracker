@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Button} from 'reactstrap'
-import ProjectData from '../ProjectData/ProjectData'
+// import ProjectData from '../ProjectData/ProjectData'
 export default function Admin() {
     const [user, setuser] = useState([])
     const [progres, setprogres] = useState([])
@@ -9,25 +9,28 @@ export default function Admin() {
         fetch('http://localhost:4734/api/datausers')
         .then(response=>response.json())
         .then(data=>{
-            this.setuser(data);
-            console.log(user)
+            setuser(data);
+            console.log("data")
+            console.log(data)
         });
     }
         function ProgresList(){
-            fetch('http://localhost:4734/api/datausers')
+            fetch('http://localhost:4734/api/progres')
             .then(response=>response.json())
             .then(data=>{
-                this.setprogres(data);
-                console.log(progres)
+                setprogres(data);
+                console.log(data)
+                
+                console.log("data2")
             });
         }
     
     return (
         <div>
-            <ProjectData />
+            {/* <ProjectData /> */}
             <h1>Admin Class</h1>
-            <Button onClick={UserList} />
-            <Button onClick={ProgresList} />
+            <Button onClick={UserList} >Get User List</Button>
+            <Button onClick={ProgresList} > Get ProgresList</Button>
         </div>
     )
 }

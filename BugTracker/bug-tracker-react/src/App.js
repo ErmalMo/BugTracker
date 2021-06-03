@@ -8,22 +8,22 @@ export default function App() {
   return (
     <BrowserRouter >
     
-     <h1 className="m-3 d-flex justify-content-center">
+     <h1 className=" m-3 d-flex justify-content-center " >
        Welcome to Bug Tracker
      </h1>
-     
      <Navigation/>
 
-     <Switch>
+     <Switch className="app-div">
         <Route exact path="/datauser" >
           <DataUser />
+        </Route>
+        <Route exact path="/admin">
+          <Admin />
         </Route>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/">
-          <Admin />
-        </Route>
+        
       </Switch>
       
       
