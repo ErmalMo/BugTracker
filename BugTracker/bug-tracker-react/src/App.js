@@ -8,7 +8,7 @@ export default function App() {
   return (
     <BrowserRouter >
     
-     <h1 className=" m-3 d-flex justify-content-center " >
+     <h1 className=" m-3 d-flex text-muted justify-content-center " >
        Welcome to Bug Tracker
      </h1>
      <Navigation/>

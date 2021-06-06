@@ -11,7 +11,8 @@ export default function ProjectData() {
         e.preventDefault();
         console.log("test");
         if(progres>=0 && progres<=100)
-        {fetch('https://localhost:5001/api/progres',{
+        {
+            fetch('http://localhost:5001/api/progres',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -29,7 +30,9 @@ export default function ProjectData() {
             // console.log(result);s
         }).catch((error)=>{
             alert("faileeed",error);
-        })}else{
+        })
+        }//if closed here
+        else{
             alert("Shtyp numrin brenda rangut 0-100")
         }
     }

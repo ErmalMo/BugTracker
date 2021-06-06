@@ -26,7 +26,7 @@ export default function DataUser() {
         e.preventDefault();
         console.log(e.target.dataEmail.value)
         console.log("test");
-        fetch('https://localhost:5001/api/datauser',{
+        fetch('http://localhost:5001/api/datauser',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
