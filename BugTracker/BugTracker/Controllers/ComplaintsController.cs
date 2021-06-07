@@ -59,8 +59,7 @@ namespace BugTracker.Controllers
                     (complaints)
                     values 
                     (
-                   '" + dof.complaints + @"'
-                    )
+                   '" + dof.complaints + @"' )
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
@@ -135,7 +134,5 @@ namespace BugTracker.Controllers
 
             return new JsonResult("Deleted Successfully");
         }
-
-
     }
 }

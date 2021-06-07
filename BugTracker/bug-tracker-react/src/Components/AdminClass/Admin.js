@@ -18,6 +18,7 @@ export default function Admin() {
           const response = await axios.get('http://localhost:5001/api/datauser');
           setUser(response.data)
           console.log("userClicked", userClicked)
+          setUserClicked(true)
           
         }
          catch (error) {
@@ -29,17 +30,18 @@ export default function Admin() {
               const response = await axios.get('http://localhost:5001/api/projectdata');
               setProgres(response.data)
               console.log("bla",progres);
+              setProgresClicked(true)
             } 
             catch (error) {
               console.error(error);
             }
           }
-          function showUserList(){
-            setUserClicked(true)
-          }
-          function showProjectData(){
-            setProgresClicked(true)
-          }
+          // function showUserList(){
+          //   setUserClicked(true)
+          // }
+          // function showProjectData(){
+          //   setProgresClicked(true)
+          // }
           function deleteProj(id){
             if(window.confirm('Are you sure?')){
                 fetch('http://localhost:5001/api/projectdata/'+id,{
@@ -59,11 +61,11 @@ export default function Admin() {
             <Button onClick={projectData} > Get ProgresList from Database</Button>
             <br />
             <br />
-            <Button onClick={showUserList} > Shfaq ProgresList</Button>
+            {/* <Button onClick={showUserList} > Shfaq ProgresList</Button>
             <br />
             <br />
             <Button onClick={showProjectData} > Shfaq ProgresList</Button>
-            <br />
+            <br /> */}
             <br />
             {userClicked ?
             <Table>

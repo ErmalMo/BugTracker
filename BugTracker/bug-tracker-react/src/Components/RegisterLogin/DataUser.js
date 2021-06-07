@@ -133,7 +133,6 @@ export default function DataUser() {
         </Form>
       </Container>
       </div>}
-      </div>
-    
+      </div>   
     )
 }
