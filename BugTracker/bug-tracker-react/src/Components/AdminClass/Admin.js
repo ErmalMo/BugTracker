@@ -1,9 +1,11 @@
 import React, {useState} from 'react'
-import {Button} from 'reactstrap'
-// import ProjectData from '../ProjectData/ProjectData'
-import axios from 'axios';
+import {Button, Table} from 'reactstrap'
 import Users from './Users';
-import Progres from './Progres'
+import axios from 'axios';
+import Home from '../HomeComponent/Home'
+import ProjectData from './ProjectData'
+
+
 export default function Admin() {
     const [user, setUser] = useState([])
     const [userClicked, setUserClicked] = useState(false)
@@ -22,9 +24,9 @@ export default function Admin() {
           console.error(error);
         }
       }
-        async function ProgresLista() {
+        async function projectData() {
             try {
-              const response = await axios.get('http://localhost:5001/api/progres');
+              const response = await axios.get('http://localhost:5001/api/projectdata');
               setProgres(response.data)
               console.log("bla",progres);
             } 
@@ -35,9 +37,18 @@ export default function Admin() {
           function showUserList(){
             setUserClicked(true)
           }
-          function showProgresList(){
+          function showProjectData(){
             setProgresClicked(true)
           }
+          function deleteProj(id){
+            if(window.confirm('Are you sure?')){
+                fetch('http://localhost:5001/api/projectdata/'+id,{
+                    method:'DELETE',
+                    header:{'Accept':'application/json',
+                'Content-Type':'application/json'}
+                })
+            }
+        }
     return (
         <div>
             {/* <ProjectData /> */}
@@ -45,14 +56,29 @@ export default function Admin() {
             <Button onClick={UserList} >Get User List from Database</Button>
             <br />
             <br />
-            <Button onClick={ProgresLista} > Get ProgresList from Database</Button>
+            <Button onClick={projectData} > Get ProgresList from Database</Button>
             <br />
             <br />
             <Button onClick={showUserList} > Shfaq ProgresList</Button>
             <br />
             <br />
-            <Button onClick={showProgresList} > Shfaq ProgresList</Button>
+            <Button onClick={showProjectData} > Shfaq ProgresList</Button>
             <br />
+            <br />
+            {userClicked ?
+            <Table>
+              <thead>
+              <tr>
+                <th>#</th>
+                <th>Email</th>
+                <th>Username</th>
+                <th>Password</th>
+              </tr>
+            </thead>
+            </Table>
+              :
+              null
+            }
             {
               userClicked ? 
               user.map(users => (
@@ -70,8 +96,11 @@ export default function Admin() {
               
               progresClicked ? 
               progres.map(progress => (
-                <div key={user.DataUserEmail}>
-                  <Progres number={progress.ProjectProgres} />
+                <div style={{paddingTop:"25px"}} >
+                  <Button color="primary">Edit</Button>
+                  <Button onClick={deleteProj} color="danger">Delete</Button>
+                  <ProjectData number={progress.ProjectProgres} project={progress.ProjectProblem}/>
+                  
                 </div>
                 // console.log( progress.ProjectProgres )
               ))

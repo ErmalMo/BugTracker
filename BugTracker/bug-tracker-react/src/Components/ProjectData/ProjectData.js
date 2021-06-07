@@ -12,7 +12,7 @@ export default function ProjectData() {
         console.log("test");
         if(progres>=0 && progres<=100)
         {
-            fetch('http://localhost:5001/api/progres',{
+            fetch('http://localhost:5001/api/projectdata',{
             method:'POST',
             headers:{
                 'Accept':'application/json',
@@ -47,8 +47,8 @@ export default function ProjectData() {
                 id="projectProgres"
                 placeholder="Progres"
               />
-              <Button outline color="danger" onClick={handleSubmit} >Delete</Button>
-              <Button outline color="primary" onClick={handleSubmit} >Edit</Button>
+              <Button outline color="danger"  >Delete</Button>
+              <Button outline color="primary"  >Edit</Button>
         <Button outline color="primary" onClick={handleSubmit} >Progres</Button>
         </div>
     )

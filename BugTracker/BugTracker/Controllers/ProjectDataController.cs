@@ -15,12 +15,12 @@ namespace BugTracker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DataUserController : ControllerBase
+    public class ProjectDataController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public DataUserController(IConfiguration configuration, IWebHostEnvironment env)
+        public ProjectDataController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
@@ -30,7 +30,7 @@ namespace BugTracker.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select DataUserId, DataUserName, DataUserEmail, DataUserPassword from dbo.DataOfUser";
+                    select ProjectId, ProjectProblem, ProjectProgres from dbo.ProjectData";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
             SqlDataReader myReader;
@@ -52,16 +52,15 @@ namespace BugTracker.Controllers
 
 
         [HttpPost]
-        public JsonResult Post(DataUser dof)
+        public JsonResult Post(ProjectData dof)
         {
             string query = @"
-                    insert into dbo.DataOfUser 
-                    (DataUserName,DataUserEmail,DataUserPassword)
+                    insert into dbo.ProjectData 
+                    (ProjectProblem,ProjectProgres)
                     values 
                     (
-                    '" + dof.DataUserName + @"'
-                    ,'" + dof.DataUserEmail + @"'
-                    ,'" + dof.DataUserPassword + @"'
+                   '" + dof.ProjectProblem + @"'
+                    ,'" + dof.ProjectProgres + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -85,14 +84,13 @@ namespace BugTracker.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(DataUser dof)
+        public JsonResult Put(ProjectData dof)
         {
             string query = @"
-                    update dbo.DataOfUser set 
-                    DataUserName = '" + dof.DataUserName + @"'
-                    ,DataUserEmail = '" + dof.DataUserEmail + @"'
-                    ,DataUserPassword = '" + dof.DataUserPassword + @"'
-                    where DataUserId = " + dof.DataUserId + @" 
+                    update dbo.ProjectData set 
+                    ProjectProblem = '" + dof.ProjectProblem + @"'
+                    ,ProjectProgres = '" + dof.ProjectProgres + @"'
+                    where ProjectId = " + dof.ProjectId + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
@@ -113,13 +111,12 @@ namespace BugTracker.Controllers
             return new JsonResult("Updated Successfully");
         }
 
-
         [HttpDelete("{id}")]
         public JsonResult Delete(int id)
         {
             string query = @"
-                    delete from dbo.DataOfUser
-                    where DataUserId = " + id + @" 
+                    delete from dbo.ProjectData
+                    where ProjectId = " + id + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");

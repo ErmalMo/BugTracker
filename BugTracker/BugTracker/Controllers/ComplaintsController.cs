@@ -15,12 +15,12 @@ namespace BugTracker.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DataUserController : ControllerBase
+    public class ComplaintsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly IWebHostEnvironment _env;
 
-        public DataUserController(IConfiguration configuration, IWebHostEnvironment env)
+        public ComplaintsController(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
             _env = env;
@@ -30,7 +30,7 @@ namespace BugTracker.Controllers
         public JsonResult Get()
         {
             string query = @"
-                    select DataUserId, DataUserName, DataUserEmail, DataUserPassword from dbo.DataOfUser";
+                    select id, complaints from dbo.Complaints";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
             SqlDataReader myReader;
@@ -52,16 +52,14 @@ namespace BugTracker.Controllers
 
 
         [HttpPost]
-        public JsonResult Post(DataUser dof)
+        public JsonResult Post(Complaints dof)
         {
             string query = @"
-                    insert into dbo.DataOfUser 
-                    (DataUserName,DataUserEmail,DataUserPassword)
+                    insert into dbo.Complaints 
+                    (complaints)
                     values 
                     (
-                    '" + dof.DataUserName + @"'
-                    ,'" + dof.DataUserEmail + @"'
-                    ,'" + dof.DataUserPassword + @"'
+                   '" + dof.complaints + @"'
                     )
                     ";
             DataTable table = new DataTable();
@@ -85,14 +83,12 @@ namespace BugTracker.Controllers
 
 
         [HttpPut]
-        public JsonResult Put(DataUser dof)
+        public JsonResult Put(Ratings dof)
         {
             string query = @"
-                    update dbo.DataOfUser set 
-                    DataUserName = '" + dof.DataUserName + @"'
-                    ,DataUserEmail = '" + dof.DataUserEmail + @"'
-                    ,DataUserPassword = '" + dof.DataUserPassword + @"'
-                    where DataUserId = " + dof.DataUserId + @" 
+                    update dbo.Complaints set 
+                    complaints = '" + dof.Rating + @"'
+                    where id = " + dof.RatingId + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
@@ -118,8 +114,8 @@ namespace BugTracker.Controllers
         public JsonResult Delete(int id)
         {
             string query = @"
-                    delete from dbo.DataOfUser
-                    where DataUserId = " + id + @" 
+                    delete from dbo.Complaints
+                    where id = " + id + @" 
                     ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("DataUserAppCon");
