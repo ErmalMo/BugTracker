@@ -62,6 +62,7 @@ C:\Users\Admin\Desktop\CSE\LAB1\LabCourseApp\BugTracker\BugTracker\obj\Debug\net
 C:\Users\Admin\Desktop\CSE\LAB1\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.dll
 C:\Users\Admin\Desktop\CSE\LAB1\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.pdb
 C:\Users\Admin\Desktop\CSE\LAB1\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.genruntimeconfig.cache
+<<<<<<< HEAD
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\bin\Debug\netcoreapp3.1\appsetting.Development.json
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\bin\Debug\netcoreapp3.1\appsettings.json
@@ -94,3 +95,5 @@ C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\obj\Debug\n
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.dll
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.pdb
 C:\Users\ermal\Desktop\New folder\LabCourseApp\BugTracker\BugTracker\obj\Debug\netcoreapp3.1\BugTracker.genruntimeconfig.cache
+=======
+>>>>>>> 5902d04d093f7b10b8ccec063d19ee2c5063e185

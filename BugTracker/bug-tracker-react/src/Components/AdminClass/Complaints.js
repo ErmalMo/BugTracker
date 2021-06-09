@@ -1,4 +1,5 @@
 import React from 'react'
+<<<<<<< HEAD
 
 export default function Complaints(props) {
     const {id, userComplain} = props;
@@ -42,4 +43,37 @@ export default function Complaints(props) {
 Complaints.defaultProps = {
     id: 0,
     userComplain: ""
+=======
+import {Table, Button,Col} from 'reactstrap' 
+import Users from './Users';
+
+export default function Complaints(props) {
+    const {id, complaints} = props;
+
+    return (
+        <Table dark>
+        <tbody>
+            
+            <Col >  
+            {/* <Button color="primary" >Edit</Button> */}
+            <Button color="danger">Delete</Button></Col>
+          <tr>
+            <th scope="row">{Users.DataUserName}</th>
+            <td>{id}</td>
+           {/* <td>{complaints}</td> */}
+           
+            
+          </tr>
+        </tbody>
+        
+        
+      </Table>
+      
+    )
+}
+Complaints.defaultProps = {
+    id : "id",
+    complaints : "complaints",
+   
+>>>>>>> 5902d04d093f7b10b8ccec063d19ee2c5063e185
 }
