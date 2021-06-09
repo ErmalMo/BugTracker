@@ -116,6 +116,8 @@ function handleProject(e){
       <div className=" m-5  text-muted justify-content-center ">
           <FormGroup >
         <textarea onChange={handleProjectChange} placeholder="Write here the problem that your having on your project" style={{height:"500px", width:"90%"}} type="textarea" name="problem" id="exampleText" />
+        <br />
+        
         <Button outline color="primary" onClick={handleProject}>Submit Rating!</Button>
       </FormGroup>
       </div>

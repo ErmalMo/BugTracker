@@ -4,12 +4,12 @@ import Navigation from './Navigation';
 import Home from './Components/HomeComponent/Home';
 import DataUser from './Components/RegisterLogin/DataUser';
 import Admin from './Components/AdminClass/Admin'
+import './App.css'
 export default function App() {
   return (
     <BrowserRouter >
-    
-     <h1 className=" m-3 d-flex text-muted justify-content-center " >
-       Welcome to Bug Tracker
+     <h1 class=" m-3 d-flex text-muted justify-content-center text-primary " >
+       Bug Tracker
      </h1>
      <Navigation/>
 
