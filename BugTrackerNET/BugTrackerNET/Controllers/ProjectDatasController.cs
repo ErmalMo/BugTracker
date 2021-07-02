@@ -20,7 +20,7 @@ namespace BugTrackerNET.Controllers
         {
             _context = context;
         }
-
+        //TEST
         // GET: api/ProjectDatas
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectData>>> GetProjectData()
@@ -51,7 +51,7 @@ namespace BugTrackerNET.Controllers
             {
                 return BadRequest();
             }
-
+            //TEST
             _context.Entry(projectData).State = EntityState.Modified;
 
             try
