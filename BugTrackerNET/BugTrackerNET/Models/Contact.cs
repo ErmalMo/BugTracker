@@ -12,5 +12,8 @@ namespace BugTrackerNET.Models
         public int id { get; set; }
         public string UserContact { get; set; }
         public string Email { get; set; }
+
+
+
     }
 }

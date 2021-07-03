@@ -1,16 +1,23 @@
-import React from 'react'
-export default function Profile(props) {
-    const { isLogged }= props;
-    if(isLogged){
-        return <h1>WORKINGGGGG</h1>
-    }else{
+import React, { useState } from 'react'
+
+export default function Profile() {
+    const [user, setUser]= useState('')
+    React.useEffect(()=>{
+        const data= localStorage.getItem('username')
+        if(data !== ''){
+          setUser(JSON.parse(data))
+        }
+        
+      })
+     function handleClick () {
+         localStorage.removeItem("username");
+         window.location.reload();
+        window.location.reload();
+     }
     return (
-        <div>
-            <h1> HELLO Profile false</h1>
+        <div style={{backgroundColor:"blue"}}>
+           <h1 >{user}</h1> 
+            <button onClick={handleClick} >LOG OUT</button>
         </div>
     )
-}
-}
-Profile.defualtProps={
-    isLogged:false
 }

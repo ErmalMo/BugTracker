@@ -1,39 +1,77 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import '../RegisterLogin/Style.css'
 import Pic from '../../Pictures/bugWhite.png'
-import Profile from '../Profile/Profile'
+import Axios from 'axios'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 export default function Form() {
 
-    const [login, setLogin]= useState(true) 
-    const [role, setRole]= useState(2);
-    const [email, setEmail]= useState("");
-    const [username, setUsername]= useState("");
-    const [password, setPassword]= useState("");
+    let history = useHistory();
 
-    
-    function handleSubmit (e){
+    const [loginR, setLogin]= useState(true) 
+    const [roleR, setRole]= useState(2);
+    const [emailR, setEmail]= useState(null);
+    const [usernameR, setUsername]= useState(null);
+    const [passwordR, setPassword]= useState(null);
+
+    function handleSubmit(e){
         e.preventDefault();
-        console.log(role)
-        console.log(email)
-        console.log(username)
-        console.log(password)
-        console.log("SUBMITED")
+        
+        // fetch('http://localhost:5000/api/UserDatas',{
+        //     method:'POST',
+        //     headers:{
+        //         'Accept':'application/json',
+        //         'Content-Type':'application/json'
+        //     },
+        //     body:JSON.stringify({
+        //         //EmployeeId:null,
+        //         email:emailR,
+        //         username:usernameR,
+        //         password:passwordR,
+        //         role:roleR
+        //     })
+        // })
+        
+        // .then(res=>res.json())
+        // .then((result)=>{
+        //     alert(result);
+        //     // console.log(result);s
+        // }).catch((error)=>{
+        //     console.log(error)
+        // })
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/api/UserDatas',
+            data: {
+                email:emailR,
+                username:usernameR,
+                password:passwordR,
+                role:roleR
+            }
+          }).then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+        localStorage.setItem('username', JSON.stringify(emailR));
+        window.location.reload();
+        history.push('/')
+        window.location.reload();
+        window.location.reload();
     }
+    
     // function handleInputEmail(e){
     //     setEmail(e.target.value)
     //     console.log(email)
     // }
     function handleInputEmail (e){
         setEmail(e.target.value)
-        console.log(email)
       }
     function handleInputUsername(e){
         setUsername(e.target.value)
-        console.log(username)
     }
     function handleInputPassword(e){
         setPassword(e.target.value) 
-        console.log(password)
     }
     function handleUserStaff(e){
         if(e.target.value == 'user' ){
@@ -42,20 +80,18 @@ export default function Form() {
             setRole(1)
         }
         
-        console.log("input",role)
+        console.log("input",roleR)
     }
     function handleLogtoReg(e){
         e.preventDefault();
         
         setLogin(false)
-        console.log(login)
     }
     
     function handleRegtoLog(e){
         e.preventDefault();
         
         setLogin(true)
-        console.log(login)
     }
     return (
         <div className="bodyForm"> 
@@ -65,7 +101,7 @@ export default function Form() {
                 <h3 className="upLogReg">Login/Register</h3>
                 </div>
                 
-                {login ?
+                {loginR ?
                 //FORM EMPTY
                 <div className="content">
                     <div className="radioo" ></div>

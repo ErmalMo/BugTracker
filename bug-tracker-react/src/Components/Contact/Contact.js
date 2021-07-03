@@ -1,9 +1,44 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Pic from '../../Pictures/bugWhite.png'
 import HomeTest1 from '../../Pictures/testHome.png'
+import axios from 'axios'
 import './Style.css'
 import { Col, Row, Card, CardTitle, CardText } from 'reactstrap'
 export default function Contact() {
+
+
+    const emailLC = localStorage.getItem('username')
+
+    const [contact, setContact]= useState(null)
+
+
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log("RATE",JSON.parse(emailLC))
+        if(contact != null){
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/api/Contacts',
+            data: {
+                userContact:contact,
+                email:JSON.parse(emailLC)
+            }
+          }).then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+        }else{
+            console.log("Contact field shoudnt be empty")
+        }
+    }
+
+
+    function handleInput(e){
+        setContact(e.target.value) 
+    }
+
+
     return (
         <div className="bodyContact" >
             <Row>
@@ -19,11 +54,9 @@ export default function Contact() {
                         <h3 className="upLogReg">Contact us</h3>
                     </div>
                     <div className="content">
-                        <input className="inp" type="email"  name="email" placeholder="Enter your email" />
+                        <textarea onChange={handleInput} style={{marginTop:"7px"}} class="txtAreaContact" type="text" rows="5" placeholder="Enter your message" required />
                         <br />
-                        <textarea style={{marginTop:"7px"}} class="txtAreaContact" type="text" rows="5" placeholder="Enter your message" />
-                        <br />
-                        <button className="buttonn" type="submit"  ><span>Submit </span></button>
+                        <button className="buttonn" type="submit" onClick={handleSubmit} ><span>Submit </span></button>
                     </div>
                 </form>
                 </Col>

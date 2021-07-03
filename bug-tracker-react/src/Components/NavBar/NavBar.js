@@ -10,6 +10,9 @@ import './NavBar.css'
 
 export default function NavBar(props) {
 
+  const data= props;
+
+  
 
 
   // const [isAdmin, setIsAdmin] = useState(false)
@@ -22,7 +25,10 @@ export default function NavBar(props) {
       </div>
       <div class="d-flex justify-content-center">
       <RSNavBar className="navBar" color="#5580a0" light expand="md">
-        <Nav >
+          <Nav >
+            {
+              data.data != null ?
+              <Nav >
           <NavItem>
             <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"5px" }} href="/">
                 Home
@@ -33,16 +39,12 @@ export default function NavBar(props) {
                 Add a project
             </NavLink>
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
               <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/feed">
                   Feed
               </NavLink>
-            </NavItem>
-          <NavItem>
-            <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/register-login">
-                Register/Login
-            </NavLink>
-          </NavItem>
+            </NavItem> */}
+          
           <NavItem>
             <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/contactus">
               Contact us
@@ -53,10 +55,41 @@ export default function NavBar(props) {
               Rate us
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/dashboard">
+              Dashboard
+            </NavLink>
+          </NavItem>
+
+          {
+          data.data ?
+          <NavItem>
+            <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/profile">
+              Profile
+            </NavLink>
+          </NavItem>
+          :
+          <NavItem>
+          <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/register-login">
+              Register/Login
+          </NavLink>
+        </NavItem>
+          }
+          </Nav>
+          :
+          <NavItem>
+          <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/register-login">
+              Register/Login
+          </NavLink>
+        </NavItem>
+        }
         </Nav>
       </RSNavBar>
       </div>
       
     </div>
   )
+}
+NavBar.defaultProps={
+  data:null,
 }

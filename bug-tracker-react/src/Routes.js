@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link
+    Link,
+    Redirect
   } from "react-router-dom";
   import Home from './Components/Home/Home'
   import Register from './Components/RegisterLogin/Register'
@@ -12,20 +13,29 @@ import {
   import ContactUs from './Components/Contact/Contact'
   import Feed from './Components/Feed/Feed'
   import Profile from './Components/Profile/Profile'
-export default function router() {
+  import Dashboard from './Components/Admin/Dashboard';
+
+export default function Routes(props) {
+
+    const data = props;
     return (
         <Router>
       <div>
-        <Switch>
-        <Route exact path="/projectdata">
+          { data.data != null ?
+            <Switch>
+            <Route exact path="/profile">
+                <Profile />
+            </Route>
+            <Route exact path="/projectdata">
                 <ProjectData />
             </Route>
-            <Route exact path="/feed">
+            {/* <Route exact path="/feed">
                 <Feed />
+            </Route> */}
+            <Route exact path="/dashboard">
+                <Dashboard />
             </Route>
-            <Route exact path="/register-login">
-                <Register />
-            </Route>
+            
             <Route exact path="/contactus">
                 <ContactUs />
             </Route>
@@ -35,9 +45,24 @@ export default function router() {
             <Route exact path="/">
                 <Home />
             </Route>
+            
+            
         </Switch>
+        
+        :
+
+        <Switch >
+        <Route exact path="/register-login">
+                <Register />
+            </Route>
+        </Switch>
+          }
+        
       </div>
     </Router>
     )
 }
 
+Routes.defaultProps={
+    data:null
+}

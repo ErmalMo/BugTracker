@@ -1,8 +1,40 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Style.css'
+import axios from 'axios'
 import { Col , Row } from 'reactstrap' 
 import HomeTest1 from '../../Pictures/testHome.png'
 export default function ProjectData() {
+    const emailLC = localStorage.getItem('username')
+
+    const [projectProblem, setProjectProblem]= useState(null)
+
+
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log("RATE",JSON.parse(emailLC))
+        if(projectProblem != null){
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/api/ProjectDatas',
+            data: {
+                projectProblem:projectProblem,
+                projectProgress:0,
+                email:JSON.parse(emailLC)
+            }
+          }).then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
+        }else{
+            console.log("Contact field shoudnt be empty")
+        }
+    }
+
+
+    function handleInput(e){
+        setProjectProblem(e.target.value) 
+    }
     return (
         <div className="bodyProjectData">
              
@@ -13,10 +45,9 @@ export default function ProjectData() {
                     </div>
                 </Col>
                 <Col sm="6"  > */}
-                    <textarea  class="txtAreaProject" type="text" rows="5" cols="18" placeholder="Enter your message" />
-                    <input className="emailProjectData" type="email"  name="email" placeholder="Enter your email" />
+                    <textarea onChange={handleInput}  class="txtAreaProject" type="text" rows="5" cols="18" placeholder="Enter your message" />
                     <br />
-                    <button className="submitProjectData">Submit your project data</button>
+                    <button onClick={handleSubmit} className="submitProjectData">Submit your project data</button>
                 {/* </Col>
                 
                  </Row> */}

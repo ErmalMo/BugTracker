@@ -1,9 +1,12 @@
 import React, {useState} from 'react'
 import StarsRating from 'stars-rating'
+import axios from 'axios';
 export default function RateUsForm() {
 
     
 const [rate, setRate]= useState(5);
+// localStorage.setItem('username', JSON.stringify(emailR));
+const emailLC = localStorage.getItem('username')
 
     function handleClick(nextValue) {
         setRate(nextValue);
@@ -12,6 +15,19 @@ const [rate, setRate]= useState(5);
     }
     function handleSubmit(){
         console.log("submited rate",rate)
+        console.log("RATE",JSON.parse(emailLC))
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/api/Ratings',
+            data: {
+                UserRating:rate,
+                Email:JSON.parse(emailLC)
+            }
+          }).then((response) => {
+            console.log(response);
+          }, (error) => {
+            console.log(error);
+          });
     }
 
     return (
