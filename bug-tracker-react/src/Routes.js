@@ -14,6 +14,7 @@ import {
   import Feed from './Components/Feed/Feed'
   import Profile from './Components/Profile/Profile'
   import Dashboard from './Components/Admin/Dashboard';
+import Staff from './Components/Staff/Staff';
 
 export default function Routes(props) {
 
@@ -34,6 +35,9 @@ export default function Routes(props) {
             </Route> */}
             <Route exact path="/dashboard">
                 <Dashboard />
+            </Route>
+            <Route exact path="/staff">
+                <Staff />
             </Route>
             
             <Route exact path="/contactus">

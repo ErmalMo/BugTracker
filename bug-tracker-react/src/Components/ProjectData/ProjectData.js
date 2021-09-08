@@ -1,11 +1,7 @@
 import React, {useState} from 'react'
 import './Style.css'
-import axios from 'axios'
-import { Col , Row } from 'reactstrap' 
-import HomeTest1 from '../../Pictures/testHome.png'
-export default function ProjectData() {
+import axios from 'axios'export default function ProjectData() {
     const emailLC = localStorage.getItem('username')
-
     const [projectProblem, setProjectProblem]= useState(null)
 
 
@@ -37,20 +33,9 @@ export default function ProjectData() {
     }
     return (
         <div className="bodyProjectData">
-             
-             {/* <Row>
-                <Col sm="6">
-                    <div className="picUpContact" > 
-                        <img className="picProjectDate" src={HomeTest1} alt="homepictest" />
-                    </div>
-                </Col>
-                <Col sm="6"  > */}
-                    <textarea onChange={handleInput}  class="txtAreaProject" type="text" rows="5" cols="18" placeholder="Enter your message" />
-                    <br />
-                    <button onClick={handleSubmit} className="submitProjectData">Submit your project data</button>
-                {/* </Col>
-                
-                 </Row> */}
+            <textarea onChange={handleInput}  class="txtAreaProject" type="text" rows="5" cols="18" placeholder="Enter your message" />
+            <br />
+            <button onClick={handleSubmit} className="submitProjectData">Submit your project data</button>
         </div>
     )
-}
+} 

@@ -84,6 +84,7 @@ namespace BugTrackerNET.Controllers
             return CreatedAtAction("GetRating", new { id = rating.ID }, rating);
         }
 
+        
         // DELETE: api/Ratings/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRating(int id)
@@ -97,7 +98,7 @@ namespace BugTrackerNET.Controllers
             _context.Rating.Remove(rating);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
 
         private bool RatingExists(int id)

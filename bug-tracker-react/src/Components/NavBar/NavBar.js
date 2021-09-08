@@ -12,8 +12,13 @@ export default function NavBar(props) {
 
   const data= props;
 
-  
-
+  const [role, setRole]= useState(null)
+    React.useEffect(()=>{
+        const getRole= localStorage.getItem('role')
+        if(data != ''){
+          setRole(JSON.parse(getRole))
+        }
+    },[])
 
   // const [isAdmin, setIsAdmin] = useState(false)
   // const [isLogedIn, setIsLogedIn] = useState(false)
@@ -55,19 +60,29 @@ export default function NavBar(props) {
               Rate us
             </NavLink>
           </NavItem>
-          <NavItem>
+          {role == 0 ?
+            <NavItem>
             <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/dashboard">
               Dashboard
             </NavLink>
           </NavItem>
-
-          {
-          data.data ?
+          :
+          role == 1 ?
+          <NavItem>
+            <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/staff">
+              Staff
+            </NavLink>
+          </NavItem>
+          :
           <NavItem>
             <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/profile">
               Profile
             </NavLink>
           </NavItem>
+            }
+          {
+          data.data ?
+          null
           :
           <NavItem>
           <NavLink style={{color:"white", borderBottom:"2px solid white", marginLeft:"15px" }} href="/register-login">

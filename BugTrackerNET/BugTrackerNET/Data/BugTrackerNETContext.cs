@@ -24,6 +24,5 @@ namespace BugTrackerNET.Data
 
         public DbSet<BugTrackerNET.Models.ProjectData> ProjectData { get; set; }
 
-
     }
 }

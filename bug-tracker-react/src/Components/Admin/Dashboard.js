@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Col , Row } from 'reactstrap'
 import axios from 'axios';
 import {Table } from 'reactstrap'
-
+import Pic from '../../Pictures/scope.png'
 import Contact from './Contact'
 import Users from './Users';
 import Rates from './Rates';
@@ -19,64 +19,84 @@ export default function Dashboard() {
     const [projectClicked, setProjectClicked] = useState(false)
 
 
-    function getUsers(){
-        const res = axios.get('http://localhost:5000/api/UserDatas').then(resp => {
+    async function getUsers(){
+      console.log("CLICKED")
+        await axios.get('http://localhost:5000/api/UserDatas').then(resp => {
             setUsers(resp.data)
+            setUserClicked(!userClicked)
             console.log(users)
         });
     }
-    function getProjects(){
-        axios.get('http://localhost:5000/api/ProjectDatas').then(resp => {
+    async function getProjects(){
+      console.log("CLICKED")
+       await axios.get('http://localhost:5000/api/ProjectDatas').then(resp => {
         setProject(resp.data)
         console.log(project)
+        setProjectClicked(!projectClicked)
         });
     }
-    function getContacts(){
-        axios.get('http://localhost:5000/api/Contacts').then(resp => {
+    async function getContacts(){
+      console.log("CLICKED")
+        await axios.get('http://localhost:5000/api/Contacts').then(resp => {
             setContact(resp.data)
+            setContactClicked(!contactClicked)
             console.log(contact);
         });
     }
-    function getRates(){
-        axios.get('http://localhost:5000/api/Ratings').then(resp => {
+    async function getRates(){
+      console.log("CLICKED")
+        await axios.get('http://localhost:5000/api/Ratings').then(resp => {
             setRate(resp.data)
+            setRateClicked(!rateClicked)
             console.log(rate);
         });
     }
-    function show(){
-        setUserClicked(!userClicked)
-    }
-    function show2(){
-        setContactClicked(!contactClicked)
-        console.log(contactClicked,"cntctnc")
-    }
-    function show1(){
-        setRateClicked(!rateClicked)
-    }
-    function show3(){
-        setProjectClicked(!projectClicked)
-        console.log(projectClicked,"TEST")
-    }
+    // function show(){
+    //     setUserClicked(!userClicked)
+    // }
+    // function show2(){
+    //     setContactClicked(!contactClicked)
+    //     console.log(contactClicked,"cntctnc")
+    // }
+    // function show1(){
+    //     setRateClicked(!rateClicked)
+    // }
+    // function show3(){
+    //     // setProjectClicked(!projectClicked)
+    //     console.log(projectClicked,"TEST")
+    // }
+    function logout () {
+      localStorage.removeItem("username");
+         localStorage.removeItem("role");
+         localStorage.removeItem("usernameee");
+      window.location.reload();
+     window.location.reload();
+  }
     return (
         <div className="bodyDashboard">
+          <div style={{ width:"40%", marginLeft:"30%" }} ></div>
             <button onClick={getUsers}>Users</button>
             <button onClick={getProjects}>Projects</button>
             <button onClick={getContacts}>Contacts</button>
             <button onClick={getRates}>Rates</button>
-            <br />
+            <button onClick={logout}>LOG OUT</button>
+            {/* <br />
             <button onClick={show}>Show Users</button>
             <button onClick={show3}>Show Projects</button>
             <button onClick={show2}>Show Contacts</button>
-            <button onClick={show1}>Show rates</button>
+            <button onClick={show1}>Show rates</button> */}
             {userClicked ?
-            <Table>
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>complaints</th>
-              </tr>
-            </thead>
-            </Table>
+            <table class="table">
+            <tbody>
+                <tr>
+                <td style={{width:"10%", color:"white"}}>ID</td>
+                <td style={{width:"55%", color:"white"}}>CONTACT TEXT </td>
+                <td style={{width:"20%", color:"white"}}>EMAIL</td>
+                <td style={{width:"12%", color:"white"}}>EDIT</td>
+                <td style={{width:"13%", color:"white"}}>DELETE</td>
+                </tr>
+            </tbody>
+        </table>
               :
               null 
             }           
@@ -95,20 +115,28 @@ export default function Dashboard() {
             }
 
 
-
-
+            { userClicked ? 
+              <div style={{backgroundColor:"white", marginBottom:"50px"}}>
+                <h1 style={{color:"white"}}>''</h1>
+              </div>
+            : null }
+            
 
 
             {/* 2 */}
             {projectClicked ?
-            <Table>
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>complaints</th>
-              </tr>
-            </thead>
-            </Table>
+            <table class="table">
+            <tbody>
+                <tr>
+                <td style={{width:"5%", color:"white"}}>ID</td>
+                <td style={{width:"60%", color:"white"}}>PROJECT </td>
+                <td style={{width:"10%", color:"white"}}>PROGRES</td>
+                <td style={{width:"20%", color:"white"}}> EMAIL</td>
+                <td style={{width:"6%", color:"white"}}>EDIT</td>
+                <td style={{width:"6%", color:"white"}}>DELETE</td>
+                </tr>
+            </tbody>
+        </table>
               :
               null 
             }           
@@ -126,20 +154,29 @@ export default function Dashboard() {
               null
             }
             {/* 2 */}
+            {projectClicked ?
+              <div style={{backgroundColor:"white", marginBottom:"50px"}}>
+                <h1 style={{color:"white"}}>''</h1>
+              </div>
+            : null}
+            
 
 
 
 
             {/* 3 */}
             {contactClicked ?
-            <Table>
-              <thead>
-              <tr>
-                <th>#</th>
-                <th>complaints</th>
-              </tr>
-            </thead>
-            </Table>
+            <table class="table">
+            <tbody>
+                <tr>
+                <td style={{width:"10%", color:"white"}}>ID</td>
+                <td style={{width:"55%", color:"white"}}>CONTACT TEXT </td>
+                <td style={{width:"20%", color:"white"}}>EMAIL</td>
+                <td style={{width:"12%", color:"white"}}>EDIT</td>
+                <td style={{width:"13%", color:"white"}}>DELETE</td>
+                </tr>
+            </tbody>
+        </table>
               :
               null 
             }           
@@ -160,20 +197,26 @@ export default function Dashboard() {
             }
             {/* 3 */}
 
+            {contactClicked?
+            <div style={{backgroundColor:"white", marginBottom:"50px"}}>
+              <h1 style={{color:"white"}}>''</h1>
+            </div>
+            :null}
 
 
             {/* 4 */}
             {rateClicked ?
-            <Table>
-              <thead>
-              <tr>
-                <th>id</th>
-                <th>Ratings</th>
-                <th>Email</th>
-                <th >edit</th>
-              </tr>
-            </thead>
-            </Table>
+            <table class="table">
+            <tbody>
+                <tr>
+                <td style={{width:"25%", color:"white"}}>ID</td>
+                <td style={{width:"25%", color:"white"}}> USERRATINGS </td>
+                <td style={{width:"30%", color:"white"}}>EMAIL </td>
+                <td style={{width:"10%", color:"white"}}> EDIT </td>
+                <td style={{width:"10%", color:"white"}}> DELETE</td>
+                </tr>
+            </tbody>
+        </table>
               :
               null 
             }           

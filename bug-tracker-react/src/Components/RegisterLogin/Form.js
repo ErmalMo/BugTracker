@@ -9,36 +9,53 @@ export default function Form() {
     let history = useHistory();
 
     const [loginR, setLogin]= useState(true) 
-    const [roleR, setRole]= useState(2);
+    const [roleR, setRole]= useState(null);
     const [emailR, setEmail]= useState(null);
     const [usernameR, setUsername]= useState(null);
     const [passwordR, setPassword]= useState(null);
 
+    const emRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    function handleSubmitLogin(e){
+        e.preventDefault();
+        if(emRegex.test(emailR)){
+            console.log('regex tested')
+        }else{
+            console.log("not regex tested")
+        }
+        axios({
+            method: 'POST',
+            url: 'http://localhost:5000/api/UserDatasLogin',
+            data: {
+                email:emailR,
+                password:passwordR,
+                rolee:roleR
+            }
+          }).then((response) => {
+              
+            if(response.status == 200)
+            {   
+                console.log(response.data[0].username)
+                console.log(response.data[0].email)
+                console.log(response.data[0].role)
+
+                localStorage.setItem('username', JSON.stringify(response.data[0].email));
+                localStorage.setItem('usernameee', JSON.stringify(response.data[0].username));
+                localStorage.setItem('role', JSON.stringify(response.data[0].role));
+                window.location.reload();
+                history.push('/')
+                window.location.reload();
+                window.location.reload();
+            }
+                console.log("responseLogin",response);
+          }, (error) => {
+            console.log("ermalror",error);
+          });
+        
+        
+    }
     function handleSubmit(e){
         e.preventDefault();
         
-        // fetch('http://localhost:5000/api/UserDatas',{
-        //     method:'POST',
-        //     headers:{
-        //         'Accept':'application/json',
-        //         'Content-Type':'application/json'
-        //     },
-        //     body:JSON.stringify({
-        //         //EmployeeId:null,
-        //         email:emailR,
-        //         username:usernameR,
-        //         password:passwordR,
-        //         role:roleR
-        //     })
-        // })
-        
-        // .then(res=>res.json())
-        // .then((result)=>{
-        //     alert(result);
-        //     // console.log(result);s
-        // }).catch((error)=>{
-        //     console.log(error)
-        // })
         axios({
             method: 'POST',
             url: 'http://localhost:5000/api/UserDatas',
@@ -50,14 +67,20 @@ export default function Form() {
             }
           }).then((response) => {
             console.log(response);
+            if(response.status == 201 || response.status == 200){
+                localStorage.setItem('username', JSON.stringify(emailR));
+                localStorage.setItem('role', JSON.stringify(roleR));
+                localStorage.setItem('usernameee', JSON.stringify(usernameR));
+                window.location.reload();
+                history.push('/')
+                window.location.reload();
+                window.location.reload();
+                console.log("CALLED")
+            }
           }, (error) => {
-            console.log(error);
+            console.log("werror",error);
           });
-        localStorage.setItem('username', JSON.stringify(emailR));
-        window.location.reload();
-        history.push('/')
-        window.location.reload();
-        window.location.reload();
+        
     }
     
     // function handleInputEmail(e){
@@ -80,7 +103,7 @@ export default function Form() {
             setRole(1)
         }
         
-        console.log("input",roleR)
+        console.log("inputRolee",roleR)
     }
     function handleLogtoReg(e){
         e.preventDefault();
@@ -105,13 +128,13 @@ export default function Form() {
                 //FORM EMPTY
                 <div className="content">
                     <div className="radioo" ></div>
-                 <input className="inp" type="username" onChange={handleInputUsername} name="username" placeholder="username" />
+                 <input className="inp" type="email" onChange={handleInputEmail} name="email" placeholder="email" />
                  <br />
                  <input className="inp" type="password" onChange={handleInputPassword} name="password" placeholder="password" />
                  <br />
                  <button className="logreg-button"  type="submit" onClick={handleLogtoReg} >  Not yet a member</button>
                  <br />
-                 <button className="button" type="submit" onClick={handleSubmit} ><span>Submit </span></button>
+                 <button className="button" type="submit" onClick={handleSubmitLogin} ><span>Submit </span></button>
                  </div>
                 :
                 <div className="content">

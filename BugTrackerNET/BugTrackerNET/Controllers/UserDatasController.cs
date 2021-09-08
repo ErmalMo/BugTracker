@@ -97,29 +97,27 @@ namespace BugTrackerNET.Controllers
 
             return CreatedAtAction("GetUserData", new { id = userData.Email }, userData);
         }
-    /*
+
+
+
+        /*
         [HttpPost]
-        public async Task<ActionResult<UserData>> PostUserDataLogin(UserData userData)
+        public async Task<ActionResult<UserData>> PostUserDataLogin(string email, string password)
         {
-            _context.UserData.Find(userData);
-            try
+            if (email == null || password == null)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserDataExists(userData.Email))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return null;
             }
 
-            return CreatedAtAction("GetUserData", new { id = userData.Email }, userData);
-        }*/
+
+            var UserDatasLogin = _context.UserData.Where(e => e.Email.Equals(email) && e.Password.Equals(password));
+
+            return CreatedAtAction("GetUserData", new { id = email, password = password });
+            
+        }
+        */
+
+
 
         // DELETE: api/UserDatas/5
         [HttpDelete("{id}")]
